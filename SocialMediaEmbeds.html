@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+        #mainContainer {
+            display: flex;
+            gap: 1rem;
+            width: 100vw;
+            padding: 4px;
+        }
+        #mainContainer > div {
+            /* width: calc((100% - 2rem) / 3); */
+            width: 100%;
+        }
+        .fb-page {
+            display: flex !important;
+            justify-content: center !important;
+        }
+        @media (max-width: 810px) {
+            #mainContainer {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0" nonce="XvkzgGua"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+    <div id="fb-root"></div>
+    <div id="mainContainer">
+        <a class="twitter-timeline" data-tweet-limit="5" href="https://twitter.com/elonmusk"></a>
+        <div class="fb-page" data-show-posts="true" data-href="https://www.facebook.com/Cristiano" data-hide-cover="true"></div>
+        <div class="elfsight-app-b7bc40dd-d48f-4826-9c09-8b726c20dd5f"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script>
+        $(window).on("load resize", function () {
+            $('iframe[src*="facebook.com"]').each(function () {
+                /* get width of parent element */
+                var width = Math.round($(this).parent().width());
+                if (width > 500) {
+                    width = 500;
+                } else if (width < 180) {
+                    width = 180;
+                }
+
+                /* replace width value in iframe src */
+                var src = new URL($(this).attr("src"));
+                src.searchParams.set("width", width);
+
+                /* append new width */
+                $(this).attr("src", src);
+                $(this).attr("width", width);
+            });
+        });
+    </script>
+</body>
+
+</html>
